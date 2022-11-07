@@ -17,6 +17,7 @@
 			npm install \
 				react-redux \
 				@reduxjs/toolkit \
+				react-router-dom \
 				react-uuid \
 				sass \
 				@iconify/react \
