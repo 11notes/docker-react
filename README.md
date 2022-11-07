@@ -2,9 +2,12 @@
 Base image to build with react.
 
 This container provides an easy and simple way to use react to build your standard web project.
+Contains some basic modules for modern web apps (like web3).
 
 ## Volumes
-* /app/src - 
+* /app/src - your react app
+* /app/public - your react app public / static content
+* /app/build - your react app production build
 
 ## Run
 Starting development

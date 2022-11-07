@@ -38,7 +38,7 @@
 				/app;
 
 # :: Volumes
-	VOLUME ["/app/src"]
+	VOLUME ["/app/src","/app/public", "/app/build"]
 
 # :: Start
 	RUN set -ex; chmod +x /usr/local/bin/entrypoint.sh
