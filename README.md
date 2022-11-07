@@ -1,5 +1,5 @@
 # Info
-Base image to build with react.
+Base image to build websites with react.
 
 This container provides an easy and simple way to use react to build your standard web project.
 Contains some basic modules for modern web apps (like web3).
