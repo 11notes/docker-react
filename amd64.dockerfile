@@ -22,7 +22,9 @@
 				sass \
 				@iconify/react \
 				axios \
-				web3; \
+				web3 \
+				react-bootstrap \
+				bootstrap; \
 			mv /app/node_modules /;
 
 	# :: cleanup
