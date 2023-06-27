@@ -12,9 +12,9 @@ export default function App(){
       <div className="container">
         <div>
           docker run --name react \<br />
-          &emsp;-v /.../app/src:/app/src \<br />
-          &emsp;-v /.../app/public:/app/public \<br />
-          &emsp;-d 11notes/react:[tag]
+          &emsp;-v ../src:/react/src \<br />
+          &emsp;-v ../public:/react/public \<br />
+          &emsp;-d 11notes/react:18.2.0
         </div>
       </div>
     </>

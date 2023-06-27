@@ -1,49 +1,56 @@
 # :: Header
-	FROM 11notes/node:lts
+  FROM 11notes/node:stable
+  ENV APP_VERSION=18.2.0
+  ENV APP_ROOT=/app
 
 # :: Run
-	USER root
+  USER root
 
-	# :: prepare
-		RUN set -ex; \
-			npm install -g npm@latest;
+  # :: prepare
+    RUN set -ex; \
+      npm install -g npm@latest; \
+      mkdir -p ${APP_ROOT};
 
-	# :: install
-		RUN set -ex; \
-			apk add --update --no-cache \
-				git; \
-			npx create-react-app app; \
-			cd /app; \
-			npm install \
-				react-redux \
-				@reduxjs/toolkit \
-				react-router-dom \
-				react-uuid \
-				sass \
-				@iconify/react \
-				axios \
-				web3 \
-				react-bootstrap \
-				bootstrap; \
-			mv /app/node_modules /;
+  # :: install
+    RUN set -ex; \
+      apk add --update --no-cache \
+        git; \
+      apk upgrade; \
+      npx create-react-app app; \
+        cd ${APP_ROOT}; \
+        npm install \
+        react@${APP_VERSION} \
+        react-redux \
+        @reduxjs/toolkit \
+        react-router-dom \
+        react-uuid \
+        sass \
+        @iconify/react \
+        axios \
+        web3 \
+        react-bootstrap \
+        bootstrap; \
+      mv ${APP_ROOT}/node_modules /;
 
-	# :: cleanup
-		RUN set -ex; \
-			rm -f /app/README.md; \
-			rm -rf /app/src/*;
+  # :: cleanup
+    RUN set -ex; \
+      rm -f ${APP_ROOT}/README.md; \
+      rm -rf ${APP_ROOT}/src/*;
 
-	# :: copy root filesystem changes
-        COPY ./rootfs /
+  # :: copy root filesystem changes and add execution rights to init scripts
+    COPY ./rootfs /
+    RUN set -ex; \
+      chmod +x -R /usr/local/bin
 
-    # :: docker -u 1000:1000 (no root initiative)
-        RUN set -ex; \
-			chown -R node:node \
-				/app;
+  # :: set correct permission
+    RUN set -ex; \
+      chown -R 1000:1000 \
+        ${APP_ROOT} \
+        /node_modules;
 
 # :: Volumes
-	VOLUME ["/app/src","/app/public", "/app/build"]
+  VOLUME ["${APP_ROOT}/src","${APP_ROOT}/public", "${APP_ROOT}/build"]
 
 # :: Start
-	RUN set -ex; chmod +x /usr/local/bin/entrypoint.sh
-	USER node
-	ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+  USER docker
+  ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
