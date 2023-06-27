@@ -2,27 +2,27 @@
 Run React based on Alpine Linux. Small, lightweight, secure and fast 🏔️
 
 ## Volumes
-* **/react/src** - Directory of  your react app
-* **/react/public** - Directory of your react app public / static content
-* **/react/build** - Directory of your react app production build
+* **/app/src** - Directory of  your react app
+* **/app/public** - Directory of your react app public / static content
+* **/app/build** - Directory of your react app production build
 
 ## Run
 Starting development
 ```shell
 docker run --name react \
-  -v ../src:/react/src \
-  -v ../public:/react/public \
-  -d 11notes/react:[tag]
+  -v ../src:/app/src \
+  -v ../public:/app/public \
+  -d 11notes/app:[tag]
 ```
 
 Build project
 ```shell
 docker run --name react \
 docker run --name react \
-  -v ../src:/react/src \
-  -v ../public:/react/public \
-  -v ../build:/react/build \
-  -d 11notes/react:[tag] \
+  -v ../src:/app/src \
+  -v ../public:/app/public \
+  -v ../build:/app/build \
+  -d 11notes/app:[tag] \
     build
 ```
 

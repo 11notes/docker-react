@@ -6,7 +6,7 @@
 # :: Run
   USER root
 
-  # :: prepare
+  # :: prepare image
     RUN set -ex; \
       npm install -g npm@latest; \
       mkdir -p ${APP_ROOT};
@@ -31,6 +31,11 @@
         react-bootstrap \
         bootstrap; \
       mv ${APP_ROOT}/node_modules /;
+
+  # :: update image
+    RUN set -ex; \
+      apk update; \
+      apk upgrade;
 
   # :: cleanup
     RUN set -ex; \
